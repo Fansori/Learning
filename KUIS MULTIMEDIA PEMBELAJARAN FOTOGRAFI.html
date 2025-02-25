@@ -1,0 +1,89 @@
+<html>
+	<head>
+	  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="bootstrap.min.css" rel="stylesheet">
+  <script src="bootstrap.bundle.min.js"></script>
+	</head>
+	  <div class="alert alert-success">
+ <h2>SELAMAT DATANG DI KUIS FOTOGRAFI</h2>
+  <p>Tunjukkan seberapa jauh pemahamanmu mengenai Fotografi</p>
+  </div>
+
+    <img src="Logo Fotografi.PNG" class="mx-auto d-block" style="width:50%"> 
+   
+	<div class="container mt-3">
+ 
+  
+  <div class="alert alert-success">
+ <h2>10 PERTANYAAN MENGENAI FOTOGRAFI DASAR</h2>
+  <p>Pilihlah Jawaban-Jawaban yang Tepat</p>
+  </div>
+  
+  
+  <div class="alert alert-info">
+       <div id="quiz"></div>
+    <button onclick="submitQuiz()">Submit</button>
+    <div id="result"></div>
+
+    <script>
+        const questions = [
+            { question: "1. Apa yang dimaksud dengan rule of thirds dalam komposisi fotografi?", options: ["A. Membagi gambar menjadi dua bagian", "B. Menempatkan objek utama di pusat gambar", "C. Membagi gambar menjadi sembilan bagian dan menempatkan objek di persimpangan garis", "D. Menggunakan garis diagonal untuk menarik perhatian"], answer: "C. Membagi gambar menjadi sembilan bagian dan menempatkan objek di persimpangan garis" },
+            { question: "2. Pencahayaan mana yang paling baik untuk memotret potret di luar ruangan?", options: ["A. Pencahayaan tengah hari yang keras", "B. Pencahayaan saat matahari terbenam", "C. Pencahayaan di dalam ruangan", "D. Pencahayaan dengan flash"], answer: "B. Pencahayaan saat matahari terbenam" },
+			{ question: "3. Apa yang dimaksud dengan depth of field dalam fotografi?", options: ["A. Jarak antara objek terdekat dan terjauh yang terlihat jelas", "B. Kekuatan cahaya yang digunakan dalam pemotretan", "C. Warna yang dominan dalam gambar", "D. Teknik pengeditan gambar"], answer: "A. Jarak antara objek terdekat dan terjauh yang terlihat jelas" },
+			{ question: "4. Apa yang paling mempengaruhi suhu warna foto?", options: ["A. ISO", "B. Shutter speed", "C. White balance", "D. Aperture"], answer: "C. White balance" },
+			{ question: "5. Dalam proses editing foto, apa yang biasanya dilakukan untuk memperbaiki komposisi?", options: ["A. Mengubah pencahayaan", "B. Menggunakan filter warna", "C. Memotong (crop) gambar", "D. Meningkatkan ketajaman"], answer: "C. Memotong (crop) gambar" },
+			{ question: "6. Apa fungsi dari tripod dalam fotografi?", options: ["A. Meningkatkan saturasi warna", "B. Menstabilkan kamera untuk menghindari guncangan", "C. Meningkatkan kecepatan shutter", "D. Menambahkan efek bokeh"], answer: "B. Menstabilkan kamera untuk menghindari guncangan" },
+			{ question: "7. Lensa mana yang paling cocok untuk memotret pemandangan?", options: ["A. Lensa makro", "B. Lensa telephoto", "C. Lensa wide-angle", "D. Lensa fisheye"], answer: "C. Lensa wide-angle" },
+			{ question: "8. Apa tujuan dari penggunaan filter ND (Neutral Density)?", options: ["A. Menambah kontras", "B. Mengurangi jumlah cahaya yang masuk ke lensa", "C. Mengubah warna gambar", "D. Meningkatkan ketajaman"], answer: "B. Mengurangi jumlah cahaya yang masuk ke lensa" },
+			{ question: "9. Dalam pengaturan kamera, apa yang dimaksud dengan ISO?", options: ["A. Kecepatan pengambilan gambar", "B. Sensitivitas sensor terhadap cahaya", "C. Kedalaman bidang fokus", "D. Warna yang dihasilkan oleh kamera"], answer: "B. Sensitivitas sensor terhadap cahaya" },
+			{ question: "10. Saat menggunakan flash, apa yang dapat membantu mengurangi bayangan keras pada wajah?", options: ["A. Menggunakan mode manual", "B. Menggunakan diffuser", "C. Mengurangi ISO", "D. Meningkatkan shutter speed"], answer: "B. Menggunakan diffuser" },
+			]
+
+        function loadQuiz() {
+            const quizDiv = document.getElementById('quiz');
+            questions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.classList.add('question');
+                questionDiv.innerHTML = `<p>${q.question}</p>`;
+                q.options.forEach(option => {
+                    questionDiv.innerHTML += `<input type="radio" name="q${index}" value="${option}"> ${option}<br>`;
+                });
+                questionDiv.innerHTML += `<div id="feedback${index}" class="feedback"></div>`;
+                quizDiv.appendChild(questionDiv);
+            });
+        }
+
+        function submitQuiz() {
+            let score = 0;
+            questions.forEach((q, index) => {
+                const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                const feedback = document.getElementById(`feedback${index}`);
+                if (selected) {
+                    if (selected.value === q.answer) {
+                        score++;
+                        feedback.textContent = "Correct!";
+                        feedback.style.color = "green";
+                    } else {
+                        feedback.textContent = "Incorrect!";
+                        feedback.style.color = "red";
+                    }
+                } else {
+                    feedback.textContent = "No answer selected!";
+                    feedback.style.color = "orange";
+                }
+            });
+            document.getElementById('result').textContent = 'Your score: ' + score;
+        }
+
+        window.onload = loadQuiz;
+    </script>
+
+</div>
+	</body>
+	
+	<footer>
+  <div class="alert alert-dark">
+    <strong>Selamat Kamu Sudah Menyelesaikan Kuis Fotografi Ini!</strong> Sampai bertemu di kelas selanjutnya!
+	</footer>
+</html>
